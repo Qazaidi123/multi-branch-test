@@ -27,7 +27,7 @@ pipeline {
     
 
         // ONLY MAIN
-        stage("Run Container) {
+        stage("Run Container") {
             when {
                 branch 'main'
             }
