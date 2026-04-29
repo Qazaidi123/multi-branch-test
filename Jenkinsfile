@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         
-        IMAGE_NAME = "qazaidi123/multi-branch-test"
-        IMAGE_TAG = "${BUILD_NUMBER}"
+        IMAGE_NAME = "multi-branch-image"
+        
     }
 
     stages {
@@ -20,7 +20,7 @@ pipeline {
         //  Run on ALL branches
         stage("Build Images") {
             steps {
-                sh "docker build -t $IMAGE_NAME:$IMAGE_TAG"
+                sh "docker build -t ${IMAGE_NAME}:${BRANCH_NAME}-${BUILD_NUMBER} ."
                 
             }
         }
@@ -32,7 +32,7 @@ pipeline {
                 branch 'main'
             }
             steps {
-               sh "docker run -d --name multicon -p 9091:80 ${IMAGE_NAME}:${IMAGE:TAG}"
+               sh "docker run -d --name multicon-${BRANCH_NAME}-${BUILD_NUMBER} -p 9091:80 ${IMAGE_NAME}:${BRANCH_NAME}-${BUILD_NUMBER}"
               }
             }
         }
