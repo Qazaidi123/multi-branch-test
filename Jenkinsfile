@@ -9,13 +9,6 @@ pipeline {
 
     stages {
 
-        stage("Clone") {
-            steps {
-                git url: "https://github.com/Qazaidi123/multi-branch-test.git",
-                    credentialsId: "git-creds"
-            }
-        }
-
 
         //  Run on ALL branches
         stage("Build Images") {
