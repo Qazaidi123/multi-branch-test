@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        SONAR_HOME = tool "Sonar"
-        IMAGE_IMAGE = "qazaidi123/multibranch"
+        
+        IMAGE_NAME = "qazaidi123/multi-branch-test"
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
@@ -32,7 +32,7 @@ pipeline {
                 branch 'main'
             }
             steps {
-                docker run -d --name multicon -p 9091:80 ${IMAGE_NAME}:${IMAGE:TAG}
+               sh "docker run -d --name multicon -p 9091:80 ${IMAGE_NAME}:${IMAGE:TAG}"
               }
             }
         }
