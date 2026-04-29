@@ -25,7 +25,10 @@ pipeline {
                 branch 'main'
             }
             steps {
-               sh "docker run -d --name multicon-${BRANCH_NAME}-${BUILD_NUMBER} -p 9091:80 ${IMAGE_NAME}:${BRANCH_NAME}-${BUILD_NUMBER}"
+               sh '''
+               docker rm -f multicon-${BUILD_NAME}-${BUILD_NUMBER} || true
+               docker run -d --name multicon-${BRANCH_NAME}-${BUILD_NUMBER} -p 9091:80 ${IMAGE_NAME}:${BRANCH_NAME}-${BUILD_NUMBER}
+               '''
               }
             }
         }
